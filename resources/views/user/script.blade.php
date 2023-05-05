@@ -11,7 +11,15 @@
 <script src="assets/js/isotope.js"></script>
 <script src="assets/js/accordions.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js" integrity="sha512-CEiA+78TpP9KAIPzqBvxUv8hy41jyI3f2uHi7DGp/Y/Ka973qgSdybNegWFciqh6GrN2UePx2KkflnQUbUhNIA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="vendor/waypoints/jquery.waypoints.js"></script>
+<script src="vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="vendor/waypoints/noframework.waypoints.js"></script>
+<script src="vendor/waypoints/noframework.waypoints.min.js"></script>
+<script src="vendor/waypoints/waypoints.debug.js"></script>
+<script src="vendor/waypoints/zepto.waypoints.js"></script>
+<script src="vendor/waypoints/zepto.waypoints.min.js"></script>
+
+
 <script language = "text/Javascript"> 
   cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
   function clearField(t){                   //declaring the array outside of the
@@ -22,4 +30,10 @@
       }
   }
   
+</script>
+<script>
+  $('.waypoint').waypoint(function() {
+   $('.navbar').toggleClass('.bg-dark').toggleClass('.bg-danger')}, {
+    offset: '20%'
+});
 </script>

@@ -1,5 +1,5 @@
 @if(Auth::user())
-<div class="container-fluid" class="" >
+<div class="container-fluid" class="">
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner" style="">
           <?php $review=App\Models\Review::all();?>

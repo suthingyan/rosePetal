@@ -1,5 +1,5 @@
 
-      <div class="container-fluid page-body-wrapper bg-white">
+      <div class="container-fluid page-body-wrapper bg-white ">
         <!-- partial -->
        <div class="container text-dark mt-5">
         {{-- <a href="{{ route('admin#product') }}"><i class="mdi mdi-keyboard-backspace"> Back</i> </a> --}}

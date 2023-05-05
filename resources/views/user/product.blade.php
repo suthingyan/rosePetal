@@ -4,7 +4,7 @@
     
   </div>
 @endif
-<section id="products mt-5 reveal">
+<section id="products mt-5 reveal waypoint">
 <div class="latest-products">
     <div class="container">
       
