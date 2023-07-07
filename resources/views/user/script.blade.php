@@ -31,9 +31,10 @@
   }
   
 </script>
-<script>
+{{-- <script>
   $('.waypoint').waypoint(function() {
    $('.navbar').toggleClass('.bg-dark').toggleClass('.bg-danger')}, {
     offset: '20%'
 });
-</script>
+
+</script> --}}

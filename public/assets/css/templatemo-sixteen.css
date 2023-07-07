@@ -1202,3 +1202,7 @@ footer .inner-content p a {
     box-shadow: 0 0 20px rgb(0 0 0 / 10%);
     z-index: 999 !important;
 }
+#count {
+	display: inline;
+	margin: 15px;
+  }

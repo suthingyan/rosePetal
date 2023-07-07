@@ -168,22 +168,56 @@ class HomeController extends Controller
         return view('user.showCart',compact('cart','count','items')) ;
      }
      //edit order quantity
-    public function editOrderQty($id){
-        $cart=Cart::select('quantity')->find($id)->first();
+    // public function editOrderQty($id){
+    //     $cart=Cart::select('quantity')->find($id)->first();
 
-        return view('user.editOrderQty',compact('cart'));
-    }
+    //     return view('user.editOrderQty',compact('cart'));
+    // }
     //update order quantity
-    public function updateOrderQty(Request $request,$id){
-        $data=Cart::where('id',$id)->first();
+
+    public function updateOrderQty(Request $request, Cart $cart)
+{
+    $request->validate([
+        'quantity' => 'required|integer|min:0'
+    ]);
+
+    $cart->update([
+        'quantity' => $request->quantity
+    ]);
+
+    return response()->json([
+        'quantity' => $cart->quantity
+    ]);
+}
+    // public function updateOrderQty(Request $request, $id)
+    // {
+    //     $quantity = $request->input('quantity');
+    //     $cart = Cart::get($id);
+
+    //     if ($cart) {
+    //         $newQuantity = $quantity;
+    //         $newPrice = $cart->price * $newQuantity;
+
+    //         Cart::update($id, [
+    //             'quantity' => $newQuantity,
+    //             'price' => $newPrice
+    //         ]);
+
+    //         return redirect()->back()->with('success', 'Quantity updated successfully.');
+    //     }
+
+    //     return redirect()->route('user#showCart')->with(['cart'=>$updateData,'success'=>'update successfully']);
+    // }
+    // public function updateOrderQty(Request $request,$id){
+    //     $data=Cart::where('id',$id)->first();
         
-        $updateData=[
-            'quantity'=>$request->quantity,
-             'totalPrice'=>$request->quantity*$data->price,
-        ];
-        Cart::where('id',$id)->update($updateData);
-        return redirect()->route('user#showCart')->with(['cart'=>$updateData,'success'=>'update successfully']);
-    }
+    //     $updateData=[
+    //         'quantity'=>$request->quantity,
+    //          'totalPrice'=>$request->quantity*$data->price,
+    //     ];
+    //     Cart::where('id',$id)->update($updateData);
+    //     return redirect()->route('user#showCart')->with(['cart'=>$updateData,'success'=>'update successfully']);
+    // }
      //delete order
      public function deleteOrder($id){
         Cart::where('id',$id)->delete();

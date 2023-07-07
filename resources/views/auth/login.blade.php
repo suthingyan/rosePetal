@@ -11,7 +11,7 @@
                 {{ session('status') }}
             </div>
         @endif
-
+            
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -42,6 +42,7 @@
                 <x-jet-button class="ml-4">
                     {{ __('Log in') }}
                 </x-jet-button>
+                
             </div>
         </form>
     </x-jet-authentication-card>

@@ -68,6 +68,7 @@ class AdminController extends Controller
         $file->move(public_path().'/product/images/',$fileName);
         $data['image']=$fileName;
         $data->save();
+        
         return redirect()->route('admin#productList')->with(['product'=>$data,'success'=>'procuct create successfully']);
     }
 

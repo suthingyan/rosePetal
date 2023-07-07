@@ -76,23 +76,17 @@
                         <td>
                           <form action="{{route('user#updateOrderQty',$carts->id)}}">
                             @csrf
-                            <div class="input-group">
-                              <span class="input-group-btn">
-                                  <button type="submit" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
-                                    <span class="glyphicon glyphicon-minus"></span>
-                                  </button>
-                              </span>
-                              <input type="text" id="quantity" name="quantity" class="form-control input-number quantity" value="{{$carts->quantity}}" min="1">
-                              <span class="input-group-btn">
-                                  <button type="submit" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
-                                      <span class="glyphicon glyphicon-plus"></span>
-                                  </button>
-                              </span>
-                          </div>
-                          </form>
-                            {{-- <input type="text" name="quantity[]" value="{{ $carts->quantity }}" hidden="">
+                            <div class="input-group" id="app">
+                             
+                              {{-- <input type="text" name="quantity[]" value="{{ $carts->quantity }}" hidden="">
                             {{ $carts->quantity }}
                             <a href="{{ route('user#editOrderQty',$carts->id) }}" class="btn"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a> --}}
+                            <button type="button" @click="decrement">-</button>
+                            <span>{{ $carts->quantity }}</span>
+                            <button type="button" @click="increment">+</button>
+                          </div>
+                          </form>
+                            
 
                         </td>
                         <td>
@@ -158,6 +152,36 @@
       <a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647;"><i class="fa fa-arrow-up"></i></a>
       
     </body>
-  
+    <script>
+      var app = new Vue({
+  el: '#app',
+        data() {
+          return {
+            quantity: this.$carts->quantity
+          };
+        },
+        methods: {
+          increment() {
+            this.updateQuantity(this.quantity + 1);
+          },
+          decrement() {
+            if (this.quantity > 0) {
+              this.updateQuantity(this.quantity - 1);
+            }
+          },
+          async updateQuantity(newQuantity) {
+            try {
+              const response = await axios.patch(`/api/products/${this.productId}`, {
+                quantity: newQuantity
+              });
+              this.quantity = response.data.quantity;
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        }
+      });
+      </script>
+      
   </html>
   

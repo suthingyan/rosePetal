@@ -14,8 +14,8 @@
           <div class="container-fluid">
             
             <div class="row mt-4">
-              <div class="col-8 offset-3">
-                <div class="col-md-9">
+              <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="col-md-12 px-5">
                 <a href="{{ route('user#home') }}" style="text-decoration:none;"><div class="mb-3 link-dark fw-bold"><i class="fas fa-arrow-left"></i>Back</div></a>
                   <div class="card">
                     <div class="card-header p-2">
@@ -25,7 +25,7 @@
                       <div class="tab-content">
                         <div class="active tab-pane" id="activity">
                             <div class="mt-3 mb-3 text-center">
-                                <img src="{{ asset('product/images')}}/{{ $detail->image }}" style="aspect-ratio:1/1;height:400px" class="img-thumbnail" alt="">
+                                <img src="{{ asset('product/images')}}/{{ $detail->image }}" style="aspect-ratio:1/1;height:400px;" class="img-thumbnail" alt="">
                             </div>
                             <div class="mt-3 mb-3">
                                 <div class="">

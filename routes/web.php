@@ -35,7 +35,7 @@ Route::get('/detailProduct/{id}',[HomeController::class,'detailProduct'])->name(
 Route::get('/searchProduct',[HomeController::class,'searchProduct'])->name('user#searchProduct');
 Route::post('/order/{id}',[HomeController::class,'order'])->name('user#order');
 Route::get('/showCart',[HomeController::class,'showCart'])->name('user#showCart');
-Route::get('/editOrder/{id}',[HomeController::class,'editOrderQty'])->name('user#editOrderQty');
+// Route::get('/editOrder/{id}',[HomeController::class,'editOrderQty'])->name('user#editOrderQty');
 Route::post('/updateOrder/{id}',[HomeController::class,'updateOrderQty'])->name('user#updateOrderQty');
 Route::get('/deleteOrder/{id}',[HomeController::class,'deleteOrder'])->name('user#deleteOrder');
 Route::post('/confirmOrder',[HomeController::class,'confirmOrder'])->name('user#confirmOrder');
