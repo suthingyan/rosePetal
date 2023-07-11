@@ -8,16 +8,6 @@
   </head>
 
   <body>
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>  
-    <!-- ***** Preloader End ***** -->
-
     <!-- Header -->
   
     {{-- <header class=""> --}}
@@ -33,46 +23,6 @@
       @include('user.product')
       @include('user.review')
       @include('user.uploadReview')
-    {{-- <div class="call-to-action">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="inner-content">
-              <div class="row">
-                <div class="col-md-8">
-                  <h4>Creative &amp; Unique <em>Sixteen</em> Products</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.</p>
-                </div>
-                @if($data->isEmpty())
-                <div class="col-md-4">
-                  <a href="{{route('login')}}" class="filled-button">Purchase Now</a>
-                </div>
-                
-                @else
-                  <div class="col-md-4">
-                    <a href="{{route('user#showCart')}}" class="filled-button">Purchase Now</a>
-                  </div>
-                
-                @endif
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> --}}
-
-    {{-- <div class="best-features container-fluid bg-light">
-      <section id="contactUs">
-        <div class="container">
-          <div class="row mt-5">
-            <div class="text-justify">
-              
-            </div>
-          </div>
-        </div>
-      </section>
-</div> --}}
-
     <section class="container-fluid reveal">
       <footer>
         @include('user.contactUs')

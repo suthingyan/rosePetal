@@ -109,29 +109,17 @@
         @if($product->status==2)
         <div class="col-md-6 col-sm-12 col-lg-4 col-xl-4 mb-3">
           <div class="product-item px-3 py-2 card h-100">
-             
-            {{-- <div class="imgContainer"> --}}
               <img src="{{ asset('product/images')}}/{{ $product->image }}" style="aspect-ratio:1/1" alt="" class="card-img-top image">
-              {{-- <div class="overlayImg">
-                <a href="{{route('user#detailProduct',$product->product_id)}}" class="icon"><button class="btn btn-md btn-dark text-white btnPrimary float-left">Detail</button></a>
-              </div>
-            </div> --}}
-            {{-- <div class="down-content"> --}}
-              {{-- <p class="fw-bolder text-dark mt-2" style="font-size:15px">Category Name: {{ $product->categoryTitle }}</p> --}}
               <div class="card-body">
                 <a href="{{route('user#detailProduct',$product->product_id)}}"><button class="btn btn-md btn-dark text-white btnPrimary float-right mt-0">Detail</button></a>
-                {{-- <h4 class="fw-bolder text-dark mb-2" style="font-size:15px">{{ $product->title }}</h4> --}}
               <h6 class="fw-bolder text-dark" style="font-size:15px"> MMK {{ $product->price }}</h6>
-              {{-- <p class="fw-bolder text-dark" style="font-size:15px"> {{ $product->description }}</p> --}}
               <form action="{{ route('user#order',$product->product_id) }}" method="post">
                 @csrf
                 <span class="fw-bolder text-dark mb-2" style="font-size:15px">Instock: {{$product->quantity}}</span>
                 @if(Auth::user())
-                  {{-- <label for="">Product Quantity</label> --}}
                   <input type="number" name="quantity" class="form-control mt-2" placeholder="Enter product quantity "  value="" min="1" id="" required>
                 <br>
                 <span>
-                 
                   <input type="submit" value="Add To Cart" class="btn btn-dark btnPrimary float-right">
                 </span>
                 @else
@@ -139,17 +127,11 @@
                 @endif
               </form>
               </div>
-            {{-- </div> --}}
           </div>
         </div>
         @endif
         @endforeach
       </div>
-     
-      
-      
-      {{-- </div> --}}
     </div>
-    
   </div>
 </section>

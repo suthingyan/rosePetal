@@ -4,15 +4,6 @@
    @include('user.css')
   </head>
    <body>
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>  
-    <!-- ***** Preloader End ***** -->
     <!-- Header -->
       <header class="">
         @include('user.nav')
@@ -41,7 +32,6 @@
               </div> 
           </div>
           <div class="row">
-            
             <div class="col-12" id="product">   
              <div class="row">
               @foreach($products as $product)
@@ -59,12 +49,7 @@
                       <span class="fw-bolder text-dark mb-2" style="font-size:15px">Instock: {{$product->quantity}}</span>
                       @endif
                       @if(Auth::user())
-                      <div id="app">
-                        <button class="value-button decrease-button"  v-on:click="decrement" >-</button>
-                        <input type="number" name="quantity" class="form-control mt-2" placeholder="Enter product quantity "  value="" min="1" id="" required>
-                        <button class="value-button increase-button" v-on:click="increment" >+</button>
-                      </div>
-                        {{-- <input type="number" name="quantity" class="form-control mt-2" placeholder="Enter product quantity "  value="" min="1" id="" required> --}}
+                        <input type="number" name="quantity" class="form-control mt-2" placeholder="Enter product quantity"  value="" min="1" id="" required>
                       <br>
                       <span>
                         <input type="submit" value="Add To Cart" class="btn btn-dark btnPrimary float-right addToCart">
@@ -94,22 +79,6 @@
     </footer>
     @include('user.script')
     <a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647;"><i class="fa fa-arrow-up"></i></a>
-    <script>
-      var app = new Vue({
-    el: '#app',
-    data: {
-      quantity: 0
-    },
-    methods: {
-      increment() { 
-        this.quantity++;
-      }
-      decrement() { 
-        this.quantity--;
-      }
-    }
-  });
-    </script> 
   </body>
 </html>
 

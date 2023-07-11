@@ -35,23 +35,16 @@ Route::get('/detailProduct/{id}',[HomeController::class,'detailProduct'])->name(
 Route::get('/searchProduct',[HomeController::class,'searchProduct'])->name('user#searchProduct');
 Route::post('/order/{id}',[HomeController::class,'order'])->name('user#order');
 Route::get('/showCart',[HomeController::class,'showCart'])->name('user#showCart');
-// Route::get('/editOrder/{id}',[HomeController::class,'editOrderQty'])->name('user#editOrderQty');
-Route::post('/updateOrder/{id}',[HomeController::class,'updateOrderQty'])->name('user#updateOrderQty');
+Route::get('/decQty/{id}',[HomeController::class,'decQty'])->name('user#decQty');
+Route::get('/incQty/{id}',[HomeController::class,'incQty'])->name('user#incQty');
 Route::get('/deleteOrder/{id}',[HomeController::class,'deleteOrder'])->name('user#deleteOrder');
 Route::post('/confirmOrder',[HomeController::class,'confirmOrder'])->name('user#confirmOrder');
 Route::get('/orderConfirmList',[HomeController::class,'orderConfirmList'])->name('user#orderConfirmList');
 Route::get('/adminConfirm',[HomeController::class,'adminConfirm'])->name('user#adminConfirm');
 Route::get('/ourProducts',[HomeController::class,'ourProducts'])->name('user#ourProducts');
-//Route::get('/filterData',[HomeController::class,'data_filter'])->name('user#filterData');
-//Route::get('/latestProduct',[HomeController::class,'latestProduct'])->name('user#latestProduct');
-// Route::get('/featured',[HomeController::class,'featured'])->name('user#featured');
-// Route::get('/popular',[HomeController::class,'popular'])->name('user#popular');
 Route::get('/aboutUsUser',[HomeController::class,'aboutUsUser'])->name('user#aboutUsUser');
 Route::get('/contactUsUser',[HomeController::class,'contactUsUser'])->name('user#contactUsUser');
 Route::get('/slider',[HomeController::class,'slider'])->name('user#slider');
-
-//hRoute::get('/reviewAdmin',[HomeController::class,'review'])->name('user#review');
-//Route::get('/storeReview',[HomeController::class,'storeReview'])->name('user#storeReview');
 Route::post('/uploadReview',[HomeController::class,'uploadReview'])->name('user#uploadReview');
 //Admin
 Route::get('/adminproduct',[AdminController::class,'product'])->name('admin#index');

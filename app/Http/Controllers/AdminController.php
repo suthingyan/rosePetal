@@ -9,6 +9,7 @@ use App\Models\AboutUs;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ContactUs;
+use App\Models\orderReject;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -258,10 +259,16 @@ class AdminController extends Controller
         
         return view('admin.showOrder',compact('order','subCategory'));
     }
-    //accept order
+    //reject order
     public function reject($id){
-        AboutUs::select('*')->where('id',$id)->delete();
-        return back()->with(['success'=>'delete data successfully']);
+       
+        $rejectOrder=Order::select('*')->where('id',$id)->get();
+        $orderReject=[];
+        $orderReject['*']=$rejectOrder;
+        $rejectData=orderReject::create($orderReject);
+        
+        Order::select('*')->where('id',$id)->delete();
+        return view('user.adminConfirmList');
     }
     //order update status
     public function updateStatus($id,Request $request){

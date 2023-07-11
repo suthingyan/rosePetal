@@ -21,8 +21,6 @@
           <div class="mt-4 row">
             <div class="col-12">
               <div class="section-heading mt-3">
-                {{-- <h2>Latest Products</h2>
-                <a href="{{ route('user#ourProducts') }}">view all products <i class="fa fa-angle-right"></i></a> --}}
                 <form style="float: right;" class="form-inline" method="get" action="{{ route('admin#searchProductList') }}">
                   @csrf
                       <div class="input-group mb-3">
@@ -102,17 +100,17 @@
                                 </a>
                               </li>
                               <li>
-                                <a class="dropdown-item" href="{{ route('admin#pending',$item->product_id)}}" onclick="return confirm('Do you want to put in pending product')">
+                                <a class="dropdown-item @if($item->status==0) bg-secondary @endif" href="{{ route('admin#pending',$item->product_id)}}" onclick="return confirm('Do you want to put in pending product')">
                                   <button class="btn btn-md btn-secondary text-dark px-auto text-primary" id="pending">Pending</button>
                                 </a>
                               </li>
                               <li>
-                                <a class="dropdown-item" href="{{ route('admin#featured',$item->product_id)}}" onclick="return confirm('Do you want to put in featured product')">
+                                <a class="dropdown-item @if($item->status==1) bg-secondary @endif" href="{{ route('admin#featured',$item->product_id)}}" onclick="return confirm('Do you want to put in featured product')">
                                   <button class="btn btn-md btn-secondary text-dark px-auto text-primary" id="featured">Featured</button>
                                 </a>
                               </li>
                               <li>
-                                <a class="dropdown-item" href="{{ route('admin#popular',$item->product_id) }}" onclick="return confirm('Do you want to put in popular product')">
+                                <a class="dropdown-item @if($item->status==2) bg-secondary @endif" href="{{ route('admin#popular',$item->product_id) }}" onclick="return confirm('Do you want to put in popular product')">
                                   <button class="btn btn-md btn-secondary text-dark px-auto text-primary" id="popular">Popular</button>
                                 </a>
                               </li>

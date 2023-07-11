@@ -18,8 +18,6 @@
 <script src="vendor/waypoints/waypoints.debug.js"></script>
 <script src="vendor/waypoints/zepto.waypoints.js"></script>
 <script src="vendor/waypoints/zepto.waypoints.min.js"></script>
-
-
 <script language = "text/Javascript"> 
   cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
   function clearField(t){                   //declaring the array outside of the
@@ -29,12 +27,4 @@
       t.style.color='#fff';
       }
   }
-  
 </script>
-{{-- <script>
-  $('.waypoint').waypoint(function() {
-   $('.navbar').toggleClass('.bg-dark').toggleClass('.bg-danger')}, {
-    offset: '20%'
-});
-
-</script> --}}
