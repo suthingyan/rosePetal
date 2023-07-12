@@ -4,7 +4,8 @@
       <div class="carousel-inner" style="">
           <?php $review=App\Models\Review::all();?>
           <div class="review">
-              <img src="{{asset('assets\images\contact-heading.jpg')}}" alt="Nature" style="width:100%;height:300px;opacity:.7">
+            <img src="{{asset('admin\assets\images\dashboard\istockphoto-1273915797-612x612.jpg')}}" alt="" style="width:100%;height:300px;opacity:.7">
+              {{-- <img src="{{asset('assets\products\images\')}}" alt="Nature" style="width:100%;height:300px;opacity:.7"> --}}
           @foreach($review as $data)
             <div class="carousel-item @if($loop->first ) active @endif">
               <div class="text-block card col-lg-8 col-md-8 col-sm-8 w-50">
