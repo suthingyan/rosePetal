@@ -19,12 +19,16 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->string('subCategory')->nullable();
+            $table->string('color')->nullable();
+            $table->string('size')->nullable();
             $table->string('productCode')->nullable();
             $table->string('title')->nullable();
             $table->integer('quantity')->nullable();
             $table->string('totalPrice')->nullable();
             $table->string('price')->nullable();
             $table->integer('product_id');
+            $table->integer('color_id');
+            $table->integer('size_id');
             $table->timestamps();
         });
     }

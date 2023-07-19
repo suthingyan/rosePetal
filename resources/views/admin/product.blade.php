@@ -19,20 +19,6 @@
         <h1 class="text-dark pt-5 fs-2 text-center fw-bold">Add Product</h1>
         <form action="{{ route('admin#uploadProduct') }}" method="post" enctype="multipart/form-data">
           @csrf
-          {{-- <div class="row px-5 mt-5">
-            <label for="categoryId" class= "col-sm-2 col-form-label">Category Id</label>
-            <div class="col-sm-10">
-              @foreach($category as $item)
-              <input type="text" name="categoryId" class="form-control bg-light text-dark @error('categoryId') is-invalid @enderror" value="{{ $item->category_id }}" disabled />
-               
-              @endforeach
-                 @error('categoryId')
-                <div class="invalid-feedback">
-                  {{ $message }}
-                </div>
-                @enderror
-            </div>
-        </div> --}}
           <div class="px-5 mt-5 row">
             <label for="categoryTitle" class="col-sm-2 col-form-label">Category</label>
             <div class="col-sm-10">
@@ -114,6 +100,67 @@
                 </div>
                     
             </div>
+            <div class="px-5 mt-5 row">
+              
+              <label for="color" class="col-sm-2 col-form-label">Color</label>
+              <div class="col-sm-10">
+                 <label>Select Color</label>
+                 <hr>
+                <div class="row">
+                  @forelse($color as $item)
+                  <div class="col-md-3">
+                    <div class="p-2 border">
+                      Color: <input type="checkbox" name="color[{{$item->color_id}}]" class="border border-dark bg-dark ms-3 me-2" value="{{$item->color_id}}">
+                      {{$item->color}}
+                      <br>
+                      Quantity: <input type="number" name="colorquantity[{{$item->color_id}}]" style="width:70px;border:1px solid ">
+                    </div>
+                  </div>
+                  @empty
+                    <div class="col-md-12">
+                      <h1>No colors found</h1>
+                    </div>
+                  
+                  @endforelse
+                </div>
+                {{-- <select name="color" class="form-control bg-light text-dark @error('color') is-invalid @enderror">
+                  <option value="">Choose Color</option>
+                  @foreach($color as $item)
+                  
+                    <option value="{{ $item->color_id }}">{{ $item->color }}</option>
+                  
+                  @endforeach
+                  
+                </select> --}}
+                @error('color')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+                @enderror
+              </div>
+            </div>
+            <div class="px-5 mt-5 row">
+              
+              <label for="size" class="col-sm-2 col-form-label">Size</label>
+              <div class="col-sm-10">
+                 
+                <select name="size" class="form-control bg-light text-dark @error('size') is-invalid @enderror">
+                  <option value="">Choose Size</option>
+                  @foreach($size as $item)
+                  
+                    <option value="{{ $item->size_id }}">{{ $item->size }}</option>
+                  
+                  @endforeach
+                  
+                </select>
+                @error('size')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+                @enderror
+              </div>
+            </div>
+            
             <div class="px-5 mt-3">
                     <input type="submit" name="" class="float-end btn btn-sm bg-dark text-white" value="Submit" />
                 </div>

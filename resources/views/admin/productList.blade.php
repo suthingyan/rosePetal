@@ -50,6 +50,8 @@
                         <th>Product Title</th>
                         <th>Price</th>
                         <th>Description</th>
+                        <th>Color</th>
+                        <th>Size</th>
                         <th>Quantity</th>
                         <th>Status</th>
                         <th>Image</th>
@@ -67,6 +69,8 @@
                         <td>{{ $item->title }}</td>
                         <td>{{ $item->price }}</td>
                         <td>{{ $item->description }}</td>
+                        <td>{{ $item->color }}</td>
+                        <td>{{ $item->size }}</td>
                         {{-- <td>{{ $item->quantity }}</td> --}}
                         <td>
                           {{ $item->quantity }}

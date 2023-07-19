@@ -113,6 +113,40 @@
                     @enderror
                 </div>
             </div>
+            <div class="px-5 mt-5 row">
+              <label for="color" class="col-sm-2 col-form-label">Color</label>
+              <div class="col-sm-10">
+                <select name="color" class="form-control bg-light text-dark @error('color') is-invalid @enderror">
+                  <option value="">Choose Color</option>
+                  @foreach($color as $item)
+                  <option value="{{ $item->color_id }}">{{ $item->color }}</option>
+                  @endforeach
+                  
+                </select>
+                @error('color')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+                @enderror
+              </div>
+            </div>
+            <div class="px-5 mt-5 row">
+              <label for="size" class="col-sm-2 col-form-label">Size</label>
+              <div class="col-sm-10">
+                <select name="size" class="form-control bg-light text-dark @error('size') is-invalid @enderror">
+                  <option value="">Choose Size</option>
+                  @foreach($size as $item)
+                  <option value="{{ $item->size_id }}">{{ $item->size }}</option>
+                  @endforeach
+                  
+                </select>
+                @error('size')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+                @enderror
+              </div>
+            </div>
             <div class="row px-5 mt-5">
                 <label for="quantity" class= "col-sm-2 col-form-label">Quantity</label>
                 <div class="col-sm-10">
