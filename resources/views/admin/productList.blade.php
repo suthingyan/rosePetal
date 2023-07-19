@@ -5,18 +5,18 @@
   </head>
   <body>
     <div class="container-scroller bg-white">
-      
+
       <!-- partial:partials/_sidebar.html -->
       @include('admin.sidebar')
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:partials/_navbar.html -->
-       
+
         @include('admin.navbar')
 
         <!-- partial -->
         {{-- @include('admin.body') --}}
-        
+
         <div class="container bg-white text-dark mt-5">
           <div class="mt-4 row">
             <div class="col-12">
@@ -27,7 +27,7 @@
                         <input type="search" class="form-control text-white" placeholder="Search product,category,price" name="searchList">
                         <input type="submit" class="btn btn-success" value="Search">
                       </div>
-                      
+
                 </form>
               </div>
             </div>
@@ -42,7 +42,7 @@
               <table class="table table-striped">
                 <thead>
                     <tr class="bg-dark text-white">
-                        
+
                         <th>Id</th>
                         {{-- <th>Category Title</th> --}}
                         <th>Sub Category</th>
@@ -59,6 +59,7 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     @foreach ($product as $item)
                     {{-- @foreach($order as $updataData) --}}
                     <tr>
@@ -69,7 +70,7 @@
                         <td>{{ $item->title }}</td>
                         <td>{{ $item->price }}</td>
                         <td>{{ $item->description }}</td>
-                        <td>{{ $item->color }}</td>
+                        <td>{{ json_encode($item->color) }}</td>
                         <td>{{ $item->size }}</td>
                         {{-- <td>{{ $item->quantity }}</td> --}}
                         <td>
@@ -92,7 +93,7 @@
                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="actiondropdown" data-bs-toggle="dropdown" aria-expanded="false">
                               Action
                             </a>
-                          
+
                             <ul class="dropdown-menu" aria-labelledby="actiondropdown">
                               <li>
                                 <a class="dropdown-item" href="{{ route('admin#productEdit',$item->product_id) }}">
@@ -124,7 +125,7 @@
                     </tr>
                     {{-- @endforeach --}}
                     @endforeach
-                    
+
                 </tbody>
             </table>
             </div>
@@ -136,6 +137,6 @@
     </div>
     <!-- container-scroller -->
     @include('admin.js')
-    
+
   </body>
 </html>

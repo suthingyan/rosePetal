@@ -34,80 +34,75 @@ class AdminController extends Controller
             else{
                 return back();
             }
-        
+
     }
     else{
         return redirect('login');
     }
     }
-    
+
     // public function createProduct(){
-       
+
     //     return view('admin.product');
     // }
     //upload product
     public function uploadProduct(Request $request){
-      
-     
-     $request->validate([
-      'categoryTitle' => 'required',
-      'subCategory' => 'required',
-      'productCode' => 'required |unique :products,productCode',
-      'productTitle'=>'required',
-      'price'=>'required',
-      'description'=>'required',
-      'color'=>'required',
-      'size'=>'required',
-      'quantity'=>'required',
-      'image'=>'required',
-     ]);
+
+
+//     $request->validate([
+//      'categoryTitle' => 'required',
+//      'subCategory' => 'required',
+//      'productCode' => 'required |unique :products,productCode',
+//      'productTitle'=>'required',
+//      'price'=>'required',
+//      'description'=>'required',
+//      'color'=>'required',
+//      'size'=>'required',
+//      'quantity'=>'required',
+//      'image'=>'required',
+//     ]);
      $pdtcolor=ProductColor::get();
      $categories = Category::get();
      $subCategory=SubCategory::get();
      $color=Color::get();
      $size=Size::get();
-     $data=new Product;
-     
-     $data->category_id=$request->categoryTitle;
-     $data->subCategory=$request->subCategory;
-     $data->productCode=$request->productCode;
-     $data->title=$request->productTitle;
-     $data->price=$request->price;
-     $data->description=$request->description;
-     $data->color=$request->color;
-     $data->size=$request->size;
-     $data->quantity=$request->quantity;
-     $data->sub_id=$subCategory[0]->sub_id;
-     $data->color_id=$color[0]->color_id;
-     $data->size_id=$size[0]->size_id;
-     
+     $data=[];
+     $data['category_id']=$request->categoryTitle;
+     $data['subCategory']=$request->subCategory;
+     $data['productCode']=$request->productCode;
+     $data['title']=$request->productTitle;
+     $data['price']=$request->price;
+     $data['description']=$request->description;
+     $data['color']=$request->color;
+     $data['size']=$request->size;
+     $data['quantity']=$request->quantity;
+     $data['sub_id']=$subCategory[0]->sub_id;
+     $data['color_id']=$color[0]->color_id;
+     $data['size_id']=$size[0]->size_id;
         $file=$request->image;
         $fileName=time().$file->getClientOriginalExtension();
         $file->move(public_path().'/product/images/',$fileName);
         $data['image']=$fileName;
-        $data->save();
-        dd($data);
-        return redirect()->route('admin#productList')->with(['product'=>$data,'success'=>'procuct create successfully']);
-      
+//        dd($data);
+
+        $product=Product::create($data);
         if($request->color){
             foreach($request->color as $key => $item){
-                $pdtColor=ProductColor::create([
-                    'product_id'=>$pdtId->product_id,
-                    'color_id'=>$item,
-                    'quantity'=>$request->colorquantity[$key] ?? 0,
-                ]);
+                $color_data=[];
+                $color_data['product_id']=$product->id;
+                    $color_data['color_id']=$item;
+                    $color_data['quantity']=$request->colorquantity[$key] ?? 0;
+                    ProductColor::create($color_data);
             }
         }
-        
-        
-       
-        
+        return redirect()->route('admin#productList')->with(['product'=>$data,'success'=>'procuct create successfully']);
+
     }
 
     //product list
     public function productList(){
         $data=Product::all();
-      
+
         return view('admin.productList')->with(['product'=>$data]);
     }
 
@@ -132,7 +127,7 @@ class AdminController extends Controller
             else{
                 return back();
             }
-        
+
     }
          }
 
@@ -190,14 +185,14 @@ class AdminController extends Controller
             'color'=>$request->color,
             'size'=>$request->size,
             'quantity'=>$request->quantity,
-            
+
         ];
         if(isset($request->image)){
             $oldImg=Product::select('image')->where('product_id',$id)->first();
             $oldImgName=$oldImg['image'];
             if(File::exists(public_path().'/product/images/'.$oldImgName))   {
                 File::delete(public_path().'/product/images/'.$oldImgName);
-            } 
+            }
         }
         $newImg=$request->image;
         $newFileName=time().$newImg->getClientOriginalName();
@@ -218,7 +213,7 @@ class AdminController extends Controller
         }
         return back()->with(['success'=>'product delete successfully']);
     }
-   
+
     //color index
     public function color(){
         return view('admin.color');
@@ -231,7 +226,7 @@ class AdminController extends Controller
            ]);
         $color=[
             'color'=>$request->color,
-            
+
         ];
 
         Color::create($color);
@@ -246,11 +241,11 @@ class AdminController extends Controller
 
     //color edit
     public function colorEdit($id){
-      
+
         $data=Color::where('color_id',$id)->first();
         return view('admin.colorEdit')->with(['editData'=>$data]);
     }
-    
+
 
     //color update
     public function updateColor($id,Request $request){
@@ -258,10 +253,10 @@ class AdminController extends Controller
             'color'=>'required',
            ]);
         $updateData=[
-           
+
             'color'=>$request->color,
         ];
-        
+
         Color::where('color_id',$id)->update($updateData);
         return redirect()->route('admin#colorList')->with(['data'=>$updateData,'success'=>'update successfully']);
     }
@@ -284,7 +279,7 @@ class AdminController extends Controller
            ]);
         $size=[
             'size'=>$request->size,
-            
+
         ];
 
         Size::create($size);
@@ -299,11 +294,11 @@ class AdminController extends Controller
 
     //size edit
     public function sizeEdit($id){
-      
+
         $data=Size::where('size_id',$id)->first();
         return view('admin.sizeEdit')->with(['editData'=>$data]);
     }
-    
+
 
     //size update
     public function updateSize($id,Request $request){
@@ -311,10 +306,10 @@ class AdminController extends Controller
             'size'=>'required',
            ]);
         $updateData=[
-           
+
             'size'=>$request->size,
         ];
-        
+
         Size::where('size_id',$id)->update($updateData);
         return redirect()->route('admin#sizeList')->with(['data'=>$updateData,'success'=>'update successfully']);
     }
@@ -354,30 +349,30 @@ class AdminController extends Controller
 
     //slider us edit
     public function sliderEdit($id){
-      
+
         $data=Slider::where('id',$id)->first();
         return view('admin.sliderEdit')->with(['editData'=>$data]);
     }
-    
+
 
     //contact us update
     public function sliderUpdate($id,Request $request){
         $request->validate([
             'image'=>'required',
            ]);
-       
+
         if(isset($request->image)){
             $oldImg=Slider::select('image')->where('id',$id)->first();
             $oldImgName=$oldImg['image'];
             if(File::exists(public_path().'/product/images/'.$oldImgName))   {
                 File::delete(public_path().'/product/images/'.$oldImgName);
-            } 
+            }
         }
         $new=$request->image;
         $newFileName=time().$new->Extension();
         $new->move(public_path().'/product/images/',$newFileName);
         $updateData['image']=$newFileName;
-        
+
         Slider::where('id',$id)->update($updateData);
         return redirect()->route('admin#storeSlider')->with(['data'=>$updateData,'success'=>'update successfully']);
     }
@@ -390,7 +385,7 @@ class AdminController extends Controller
         if(File::exists(public_path().'/product/images/'.$fileName)){
             File::delete(public_path().'/product/images/'.$fileName);
         }
-        
+
         return back()->with(['success'=>'delete data successfully']);
     }
 
@@ -399,17 +394,17 @@ class AdminController extends Controller
     public function showOrder(){
         $subCategory=SubCategory::all();
         $order=Order::all();
-        
+
         return view('admin.showOrder',compact('order','subCategory'));
     }
     //reject order
     public function reject($id){
-       
+
         $rejectOrder=Order::select('*')->where('id',$id)->get();
         $orderReject=[];
         $orderReject['*']=$rejectOrder;
         $rejectData=orderReject::create($orderReject);
-        
+
         Order::select('*')->where('id',$id)->delete();
         return view('user.adminConfirmList');
     }
@@ -419,7 +414,7 @@ class AdminController extends Controller
         ->join('orders','orders.product_id','products.product_id')
         ->where('id',$id)
         ->get();
-       
+
         $order=Order::find($id);
         $order->status='accepted';
         $order->save();
@@ -448,7 +443,7 @@ $products=Product::all();
            ]);
         $aboutUs=[
             'description'=>$request->description,
-            
+
         ];
 
         AboutUs::create($aboutUs);
@@ -464,11 +459,11 @@ $products=Product::all();
 
     //about us edit
     public function aboutUsEdit($id){
-      
+
         $data=AboutUs::where('id',$id)->first();
         return view('admin.aboutUsEdit')->with(['editData'=>$data]);
     }
-    
+
 
     //about us update
     public function aboutUsUpdate($id,Request $request){
@@ -476,10 +471,10 @@ $products=Product::all();
             'description'=>'required',
            ]);
         $updateData=[
-           
+
             'description'=>$request->description,
         ];
-        
+
         AboutUs::where('id',$id)->update($updateData);
         return redirect()->route('admin#storeAboutUs')->with(['data'=>$updateData,'success'=>'update successfully']);
     }
@@ -492,7 +487,7 @@ $products=Product::all();
 
 
 
- 
+
     //category
     public function category(){
         if(Auth::id()){
@@ -502,7 +497,7 @@ $products=Product::all();
             else{
                 return back();
             }
-        
+
     }
     else{
         return redirect('login');
@@ -513,16 +508,16 @@ $products=Product::all();
     public function uploadCategory(Request $request){
        $request->validate([
         'categoryTitle'=>'required',
-        
+
        ]);
         $data=[
-            'categoryTitle'=>$request->categoryTitle, 
+            'categoryTitle'=>$request->categoryTitle,
 
         ];
-      
-        
+
+
         Category::create($data);
-        
+
         return redirect()->route('admin#categoryList')->with(['category'=>$data,'success'=>'category create successfully']);
     }
 
@@ -555,7 +550,7 @@ $products=Product::all();
             else{
                 return back();
             }
-        
+
     }
          }
 
@@ -573,7 +568,7 @@ $products=Product::all();
         $updateData=[
             'categoryTitle'=>$request->categoryTitle,
         ];
-       
+
         Category::where('category_id',$id)->update($updateData);
         return redirect()->route('admin#categoryList')->with(['data'=>$updateData,'success'=>'update successfully']);
 
@@ -597,7 +592,7 @@ $products=Product::all();
             else{
                 return back();
             }
-        
+
     }
     else{
         return redirect('login');
@@ -609,14 +604,14 @@ $products=Product::all();
        $request->validate([
         'subCategory'=>'required|unique:sub_categories,subCategory',
        ]);
-       
+
         $data=[
             'subCategory'=>$request->subCategory,
-            'category_id'=>$request->categoryTitle, 
+            'category_id'=>$request->categoryTitle,
         ];
         SubCategory::create($data);
-        return redirect()->route('admin#subCategoryList')->with(['subCategory'=>$data,'success'=>'category create successfully']); 
-        
+        return redirect()->route('admin#subCategoryList')->with(['subCategory'=>$data,'success'=>'category create successfully']);
+
     }
 
     //product list
@@ -650,7 +645,7 @@ $products=Product::all();
             else{
                 return back();
             }
-        
+
     }
          }
 
@@ -668,7 +663,7 @@ $products=Product::all();
         $updateData=[
             'subCategory'=>$request->subCategory,
         ];
-       
+
         SubCategory::where('sub_id',$id)->update($updateData);
         return redirect()->route('admin#subCategoryList')->with(['data'=>$updateData,'success'=>'update successfully']);
 
@@ -679,5 +674,5 @@ $products=Product::all();
         SubCategory::where('sub_id',$id)->delete();
         return back()->with(['success'=>'category delete successfully']);
     }
-   
+
 }

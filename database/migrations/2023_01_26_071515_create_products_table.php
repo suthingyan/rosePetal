@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('title')->nulable();
             $table->string('price')->nullable();
             $table->string('description')->nullable();
-            $table->string('color')->nullable();
+            $table->json('color')->nullable();
             $table->string('size')->nullable();
             $table->integer('quantity')->nullable();
             $table->string('image')->nullable();
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->integer('sub_id');
             $table->integer('color_id');
             $table->integer('size_id');
-            $table->integer('product_colors_id');
+//            $table->integer('product_colors_id');
             // $table->foreign(column:'category_id')->constrained(table:'categories',column:'category_id');
             // $table->unsignedBigInteger('category_id');
             // $table->foreignId(columns:'category_id')->references(columns:'category_id')->on(table:'categories');
